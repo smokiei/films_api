@@ -18,7 +18,7 @@ pipeline {
                 sh 'docker run -d --tty --network=host --name film-api-tests-container film-api-tests-image'
                 sh 'docker cp film-api-tests-container:/films_api/reports/result.xml .'
                 junit 'result.xml'
-                archiveArtifacts artifacts: '**/TestResults.xml'
+                archiveArtifacts artifacts: 'result.xml'
             }
         }
     }
