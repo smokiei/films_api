@@ -21,8 +21,10 @@ pipeline {
                 archiveArtifacts artifacts: '**/TestResults.xml'
             }
         }
+    }
 
-        post {
+
+    post {
         always {
             script {
                 sh 'docker stop film-api-tests-container'
@@ -30,7 +32,6 @@ pipeline {
                 sh 'docker rmi film-api-tests-image'
             }
         }
-    }
-    }
+        }
 }
 
