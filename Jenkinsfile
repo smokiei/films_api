@@ -16,15 +16,13 @@ pipeline {
             }
             steps {
                 sh 'docker run -d --tty --network=host --name film-api-tests-container film-api-tests-image'
-                sh 'docker cp film-api-tests-container:/films_api/reports/result.xml ./'
-                junit './result.xml'
+                sh 'docker cp film-api-tests-container:/films_api/reports/result.xml .'
+                junit 'result.xml'
                 archiveArtifacts artifacts: '**/TestResults.xml'
             }
         }
-    }
-}
 
-    post {
+        post {
         always {
             script {
                 sh 'docker stop film-api-tests-container'
@@ -33,3 +31,6 @@ pipeline {
             }
         }
     }
+    }
+}
+
