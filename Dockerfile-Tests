@@ -11,5 +11,5 @@ COPY ./ .
 RUN chown -R userapi:userapi ./
 USER userapi
 
-RUN ["pytest", "-v", "--junitxml=reports/result.xml"]
+#RUN ["pytest", "-v", "--junitxml=reports/result.xml"]
 CMD tail -f /dev/null
