@@ -3,7 +3,7 @@ pipeline {
     stages {
          stage('Docker Build test image') {
             when {
-                branch 'dev'
+                branch pattern: "dev-\\.*", comparator: "REGEXP"
             }
             steps {
                 sh 'docker build -t film-api-tests-image -f Dockerfile-Tests .'
@@ -12,7 +12,7 @@ pipeline {
 
         stage('Run tests') {
             when {
-                branch 'dev'
+                branch pattern: "dev-\\.*", comparator: "REGEXP"
             }
             steps {
                 sh 'docker run -d --tty --network=host --name film-api-tests-container film-api-tests-image'
@@ -32,8 +32,6 @@ pipeline {
                 sh 'docker rm film-api-tests-container'
                 sh 'docker rmi film-api-tests-image'
             }
-
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
     }
 }
