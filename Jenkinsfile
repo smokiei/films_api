@@ -3,7 +3,7 @@ pipeline {
     stages {
          stage('Docker Build test image') {
             when {
-                branch pattern: "dev\\.*", comparator: "REGEXP"
+                branch pattern: "dev\.*", comparator: "REGEXP"
             }
             steps {
                 sh 'docker build -t film-api-tests-image -f Dockerfile-Tests .'
@@ -12,7 +12,7 @@ pipeline {
 
         stage('Run tests') {
             when {
-                branch pattern: "dev\\.*", comparator: "REGEXP"
+                branch pattern: "dev\.*", comparator: "REGEXP"
             }
             steps {
                 sh 'docker run -d --tty --network=host --name film-api-tests-container film-api-tests-image'
