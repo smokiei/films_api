@@ -32,6 +32,8 @@ pipeline {
                 sh 'docker rm film-api-tests-container'
                 sh 'docker rmi film-api-tests-image'
             }
+
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
         }
     }
 }
