@@ -16,7 +16,7 @@ pipeline {
             }
             steps {
                 sh 'docker run -d --tty --network=host --name film-api-tests-container film-api-tests-image'
-                sh 'docker exec -d film-api-tests-container sh -c \"pytest -v --junitxml=result.xml\"'
+                sh 'docker exec -d film-api-tests-container sh -c "pytest -v --junitxml=result.xml"'
                 sh 'rm -f result.xml'
                 sh 'docker cp film-api-tests-container:/films_api/result.xml .'
                 junit 'result.xml'
